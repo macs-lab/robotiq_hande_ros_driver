@@ -21,17 +21,25 @@ def log_info(gripper):
 gripper = robotiq_gripper.RobotiqGripper()
 gripper.connect(ip, 63352)
 # gripper.activate()
+speed = 225                 # This can be varied from 0-255
+force = 225                 # This can be varied from 0-255
+
+# Activate gripper (done at startup, otherwise not necessary)
+if action == "0":
+    # print("Activating gripper")
+    gripper.activate()
 
 # Open Gripper
 if action == "1":
     # print("Trying to open gripper")
-    gripper.move_and_wait_for_pos(0, 255, 255)
+    gripper.move_and_wait_for_pos(0, speed, force)
     log_info(gripper)
 
 # Close Gripper
 elif action == "2":
     # print("Trying to close gripper")
-    gripper.move_and_wait_for_pos(255, 255, 255)
+    gripper.move_and_wait_for_pos(255, speed, force)
+
     log_info(gripper)
 
-
+print("Done gripping task")
