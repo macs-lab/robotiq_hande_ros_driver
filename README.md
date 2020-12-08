@@ -9,6 +9,7 @@ To use this package install python3.8 on your computer. Do NOT set python3.8 as 
 3. Send commands to the gripper (there are a few options for this)
 
 USING ROS TOPICS 
+
 A) Publish commands to the /gripper_comand rostopic using the shell command "rostopic pub gripper_command std_msgs/Int32 1" to open the gripper and "rostopic pub gripper_command std_msgs/Int32 2" to close the gripper
 
 USING A GRIPPER SERVER
