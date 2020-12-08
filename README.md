@@ -12,9 +12,11 @@ USING ROS TOPICS
 A) Publish commands to the /gripper_comand rostopic using the shell command "rostopic pub gripper_command std_msgs/Int32 1" to open the gripper and "rostopic pub gripper_command std_msgs/Int32 2" to close the gripper
 
 USING A GRIPPER SERVER
+
 B) See midterm_demo.py in the external_control_ur5e package for more details on how this is done
 
 DIRECTLY RUNNING COMMAND FILES
+
 C) When inside the src directory of the gripper controller run >>python3.8 gripper_commander.py 1 to open the gripper or >>python3.8 gripper_commander.py 2 to close the gripper.
 
 This is useful if you're not ready to integrate gripping into your main process file, but need the gripper to grab or release something. 
