@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>robotiq_hande_driver</name>
+  <name>robotiq_hande_ros_driver</name>
   <version>0.0.0</version>
   <description>The robotiq_hande_driver package</description>
 
