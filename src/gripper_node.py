@@ -19,12 +19,13 @@ class HandEGripper:
         # get speed and force
         self.speed = rospy.get_param('~speed', 255)
         self.force = rospy.get_param('~force', 255)
-        self.sub = rospy.Subscriber("gripper_command", Int32, self.gripperCallback)
+        self.sub = rospy.Subscriber("gripper_command", Int32, self.gripperCallback, queue_size=10)
         # set up server
         self.gripper_server = rospy.Service('gripper_service', gripper_service, self.serverCallback)
     
     def gripperCallback(self, data):
-        #rospy.loginfo(data.data)
+        rospy.loginfo("received topic data")
+        rospy.loginfo(data.data)
         if data.data == 0:
             rospy.loginfo("closing the gripper. Speed={}, force={}".format(self.speed, self.force))
             self.gripper.move_and_wait_for_pos(255, self.speed, self.force)
