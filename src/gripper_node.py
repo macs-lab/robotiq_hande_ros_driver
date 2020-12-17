@@ -15,7 +15,7 @@ class HandEGripper:
         rospy.loginfo("Connecting to the gripper.....")
         self.gripper.connect(ip, 63352)
         rospy.loginfo("Activating the gripper.....")
-        self.gripper.activate()
+        self.gripper.activate(auto_calibrate=False)
         # get speed and force
         self.speed = rospy.get_param('~speed', 255)
         self.force = rospy.get_param('~force', 255)
