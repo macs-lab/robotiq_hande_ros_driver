@@ -16,31 +16,24 @@ class HandEGripper:
         self.gripper.connect(ip, 63352)
         rospy.loginfo("Activating the gripper.....")
         self.gripper.activate(auto_calibrate=False)
-        # get speed and force
-        self.speed = rospy.get_param('~speed', 255)
-        self.force = rospy.get_param('~force', 255)
-        self.sub = rospy.Subscriber("gripper_command", Int32, self.gripperCallback, queue_size=10)
         # set up server
         self.gripper_server = rospy.Service('gripper_service', gripper_service, self.serverCallback)
-    
-    def gripperCallback(self, data):
-        rospy.loginfo("received topic data")
-        rospy.loginfo(data.data)
-        if data.data == 0:
-            rospy.loginfo("closing the gripper. Speed={}, force={}".format(self.speed, self.force))
-            self.gripper.move_and_wait_for_pos(255, self.speed, self.force)
-        if data.data == 1:
-            rospy.loginfo("opening the gripper. Speed={}, force={}".format(self.speed, self.force))
-            self.gripper.move_and_wait_for_pos(0, self.speed, self.force)
+        rospy.loginfo("Gripper ready to receive service request...")
     
     def serverCallback(self, request):
-        if request.command == 0:
-            rospy.loginfo("closing the gripper. Speed={}, force={}".format(self.speed, self.force))
-            self.gripper.move_and_wait_for_pos(255, self.speed, self.force)
-        if request.command == 1:
-            rospy.loginfo("opening the gripper. Speed={}, force={}".format(self.speed, self.force))
-            self.gripper.move_and_wait_for_pos(0, self.speed, self.force)
-        return(gripper_serviceResponse(0))
+        pos = request.position
+        speed = request.speed
+        force = request.force
+        if speed > 255 or speed <=0:
+            return(gripper_serviceResponse('invalid speed value. Valid in range (0,255]'))
+        if force > 255 or force <=0:
+            return(gripper_serviceResponse('invalid force value. Valid in range (0,255]'))
+        if pos > 255 or pos < 0:
+            return(gripper_serviceResponse('invalid position value. Valid in range [0,255]'))
+
+        rospy.loginfo("moving the gripper. positino = {}, speed={}, force={}".format(pos, speed, force))
+        self.gripper.move_and_wait_for_pos(pos, speed, force)
+        return(gripper_serviceResponse('Done'))
 
 if __name__ == '__main__':
     gripper_obj = HandEGripper()

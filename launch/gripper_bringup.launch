@@ -1,7 +1,5 @@
 <launch>
     <node name="gripper_node" pkg="robotiq_hande_ros_driver" type="gripper_node.py" output="screen">
-        <param name="robot_ip" value="192.168.0.2"/>
-        <param name="speed" value="255"/>
-        <param name="force" value="255"/>
+        <param name="robot_ip" value="192.168.0.3"/>
     </node>
 </launch>

@@ -14,17 +14,10 @@ catkin_make
 ## Usage
 Create or modify the existing launch file based on your needs.
 * robot_ip: the IP address of your UR robot
-* speed: finger closing and opening speed (1~255)
-* force: force applied by the finger (1~255)
 
-Then start the driver by running the launch file. The gripper can be controlled using ROS topics or services.
+Then start the driver by running the launch file. The gripper is controlled using ROS service.
 
-### Using topics
-The driver listens to messages on `hand_e_gripper_node` topics (message type [Int32](http://docs.ros.org/en/melodic/api/std_msgs/html/msg/Int32.html)). To open the gripper, send value 1. To close the gripper, send value 0.
-
-### Using services
 Services allows the driver to send feedback when the finger action completes. This is useful when you want the program to wait until gripper complete its movement. See [`test.py`](https://github.com/macs-lab/robotiq_hande_ros_driver/blob/master/src/test.py) for example usage.
-
 
 ## Questions
 Have questions? Open up a discussion [here](https://github.com/macs-lab/robotiq_hande_ros_driver/discussions)
