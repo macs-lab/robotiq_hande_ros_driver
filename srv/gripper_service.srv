@@ -1,4 +1,6 @@
 # 1 to open gripper and 0 to close gripper
-int32 command
+int32 position 
+int32 speed
+int32 force
 ---
-int32 response
+string response
